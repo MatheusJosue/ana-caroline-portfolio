@@ -1,5 +1,6 @@
 'use client'
 import { Container, Button } from 'react-bootstrap'
+import { FaWhatsapp } from 'react-icons/fa'
 
 interface HeroProps {
   nome: string
@@ -9,7 +10,7 @@ interface HeroProps {
 
 export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/55SEUNUMERO', '_blank')
+    window.open('https://wa.me/5511973772653', '_blank')
   }
 
   return (
@@ -68,10 +69,14 @@ export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
               padding: '15px 40px',
               fontSize: '1.2rem',
               borderRadius: '50px',
-              fontWeight: 600
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px'
             }}
           >
-            📱 Agendar Horário
+            <FaWhatsapp size={24} />
+            Agendar Horário
           </Button>
         </div>
       </Container>

@@ -1,5 +1,6 @@
 'use client'
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { FaWhatsapp, FaInstagram, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
 
 export default function Footer() {
   return (
@@ -8,41 +9,50 @@ export default function Footer() {
         <Row>
           <Col md={6} className="mb-4 mb-md-0">
             <h3 style={{ color: '#880e4f', marginBottom: '20px' }}>Entre em Contato</h3>
-            <p style={{ color: '#4a0e2e', marginBottom: '15px' }}>
-              📱 WhatsApp: (00) 12345-6789
+            <p style={{ color: '#4a0e2e', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <FaWhatsapp style={{ color: '#25D366' }} />
+              <strong>WhatsApp:</strong> (11) 97377-2653
             </p>
-            <p style={{ color: '#4a0e2e', marginBottom: '15px' }}>
-              📍 Localização: Cidade, Estado
+            <p style={{ color: '#4a0e2e', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <FaMapMarkerAlt style={{ color: '#ec407a' }} />
+              <strong>Localização:</strong> São Paulo, SP
             </p>
-            <p style={{ color: '#4a0e2e' }}>
-              ⏰ Horário: Seg a Sex - 9h às 18h
+            <p style={{ color: '#4a0e2e', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <FaClock style={{ color: '#880e4f' }} />
+              <strong>Horário:</strong> Seg a Sex - 9h às 18h
             </p>
 
-            <div style={{ marginTop: '30px' }}>
+            <div style={{ marginTop: '30px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
               <Button
-                href="https://wa.me/55SEUNUMERO"
+                href="https://wa.me/5511973772653"
                 target="_blank"
                 style={{
                   backgroundColor: '#25D366',
                   border: 'none',
                   padding: '12px 30px',
                   borderRadius: '30px',
-                  marginRight: '15px'
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
                 }}
               >
+                <FaWhatsapp />
                 WhatsApp
               </Button>
               <Button
-                href="https://instagram.com"
+                href="https://www.instagram.com/anacarol_sol/"
                 target="_blank"
-                variant="outline-secondary"
                 style={{
-                  borderColor: '#880e4f',
-                  color: '#880e4f',
+                  backgroundColor: '#ec407a',
+                  border: 'none',
                   padding: '12px 30px',
-                  borderRadius: '30px'
+                  borderRadius: '30px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
                 }}
               >
+                <FaInstagram />
                 Instagram
               </Button>
             </div>
@@ -66,7 +76,7 @@ export default function Footer() {
                 justifyContent: 'center',
                 marginTop: '20px'
               }}>
-                <span style={{ fontSize: '50px' }}>📍</span>
+                <FaMapMarkerAlt size={50} style={{ color: '#ec407a' }} />
               </div>
             </div>
           </Col>
