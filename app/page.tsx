@@ -14,7 +14,7 @@ export default function Home() {
       <Sobre />
       <Servicos />
       <Galeria />
-      <Depoimentos />
+      {/* <Depoimentos /> */}
       <Footer />
     </main>
   );
