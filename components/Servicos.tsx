@@ -37,7 +37,7 @@ export default function Servicos() {
         >
           Serviços
         </h2>
-        <Row>
+        <Row className="justify-content-center">
           {servicos.map((servico, index) => {
             const Icone = servico.icone;
             return (
