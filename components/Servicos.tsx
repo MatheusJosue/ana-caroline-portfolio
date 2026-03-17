@@ -8,12 +8,6 @@ const servicos = [
     descricao:
       "Banho completo com produtos específicos para cada tipo de pelagem",
     icone: FaBath,
-    preco: "A partir de R$ 50",
-  },
-  {
-    titulo: "Banho + Tosa Higienica",
-    descricao: "Tosa estética ou higiênica, conforme sua preferência",
-    icone: FaCut,
     preco: "A partir de R$ 60",
   },
   {
