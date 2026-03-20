@@ -1,14 +1,62 @@
+/* ============================================
+   ANA CAROLINE - Design System
+   Luxury Pet Grooming Portfolio
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --color-primary: #ec407a;
+  /* Colors - Refined Pink Palette */
+  --color-primary: #e91e63;
+  --color-primary-light: #f48fb1;
+  --color-primary-dark: #ad1457;
   --color-secondary: #880e4f;
-  --color-text: #4a0e2e;
+  --color-accent: #ff4081;
+  --color-text: #2d1f2f;
+  --color-text-light: #5a4a5a;
   --color-white: #ffffff;
-  --gradient-bg: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-blur: 10px;
+  --color-cream: #fff8fc;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #ffeef6 0%, #fce4ec 25%, #f8bbd9 50%, #f48fb1 75%, #ffeef6 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 245, 0.7) 100%);
+  --gradient-button: linear-gradient(135deg, #ff4081 0%, #e91e63 50%, #ad1457 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(233, 30, 99, 0.15) 0%, transparent 70%);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: rgba(233, 30, 99, 0.1);
+  --glass-blur: 20px;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+
+  /* Border Radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(233, 30, 99, 0.08);
+  --shadow-md: 0 8px 24px rgba(233, 30, 99, 0.12);
+  --shadow-lg: 0 16px 48px rgba(233, 30, 99, 0.15);
+  --shadow-glow: 0 0 40px rgba(233, 30, 99, 0.2);
 }
 
+/* Reset & Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,39 +68,98 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  background: var(--gradient-bg);
+  font-family: 'Outfit', sans-serif;
+  background: var(--gradient-hero);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
   color: var(--color-text);
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--color-secondary);
+  line-height: 1.2;
 }
 
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+p {
+  line-height: 1.7;
+  color: var(--color-text-light);
+}
+
+/* Glass Card - Enhanced */
 .glass-card {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
 }
 
+.glass-card:hover {
+  background: var(--glass-bg-strong);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-4px);
+}
+
+/* Section */
 .section {
-  padding: 80px 0;
+  padding: var(--space-2xl) 0;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-lg);
 }
 
-/* Animações */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -60,51 +167,144 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(236, 64, 122, 0.7);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
   }
   50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 15px rgba(236, 64, 122, 0);
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
   }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animation Classes */
 .fade-in-up {
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 0.8s var(--transition-normal) forwards;
+}
+
+.fade-in-scale {
+  animation: fadeInScale 0.6s var(--transition-normal) forwards;
 }
 
 .whatsapp-btn {
-  animation: pulse 2s infinite;
+  animation: pulse 2.5s ease-in-out infinite;
 }
 
-/* Responsividade */
+/* Staggered Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  position: relative;
+}
+
+.section-title h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-button);
+  border-radius: var(--radius-full);
+}
+
+/* Floating Elements */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
 @media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    padding: var(--space-xl) 0;
   }
 
-  h1 {
-    font-size: 2rem !important;
-  }
-
-  h2 {
-    font-size: 1.8rem !important;
-  }
-
-  .glass-card {
-    margin: 10px;
+  .section-title h2 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 1.8rem !important;
+    font-size: 2rem;
   }
 
   .whatsapp-btn {
     font-size: 1rem !important;
-    padding: 12px 30px !important;
+    padding: 12px 28px !important;
   }
 }

@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Container, Row, Col, Modal } from 'react-bootstrap'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const fotos = [
   { id: 1, antes: '/images/antes1.jpeg', depois: '/images/depois1.jpeg', nome: 'Transformação 1' },
@@ -23,9 +23,23 @@ const fotos = [
   { id: 17, antes: '/images/antes17.jpeg', depois: '/images/depois17.jpeg', nome: 'Transformação 17' }
 ]
 
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: Math.min(i * 0.05, 0.5), // Cap delay for better UX
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  }),
+}
+
 export default function Galeria() {
   const [showModal, setShowModal] = useState(false)
   const [selectedFoto, setSelectedFoto] = useState<typeof fotos[0] | null>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const openModal = (foto: typeof fotos[0]) => {
     setSelectedFoto(foto)
@@ -33,122 +47,271 @@ export default function Galeria() {
   }
 
   return (
-    <section id="galeria" className="section">
-      <Container>
-        <h2 style={{ textAlign: 'center', color: '#880e4f', marginBottom: '20px' }}>
-          Transformações
-        </h2>
-        <p style={{ textAlign: 'center', color: '#ad1457', marginBottom: '50px' }}>
-          Veja o antes e depois dos meus trabalhos
-        </p>
+    <section id="galeria" className="section" style={{ position: 'relative' }}>
+      {/* Background decoration */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '5%',
+          width: '250px',
+          height: '250px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(233, 30, 99, 0.08) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+          zIndex: 0,
+        }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity }}
+      />
+
+      <Container style={{ position: 'relative', zIndex: 1 }}>
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-5"
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '20px' }}>
+            <motion.div
+              animate={{ rotate: [0, -10, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+            >
+              <span style={{ fontSize: '28px' }}>✂️</span>
+            </motion.div>
+            <h2
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontWeight: 600,
+                background: 'linear-gradient(135deg, #e91e63 0%, #ad1457 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                margin: 0,
+              }}
+            >
+              Transformações
+            </h2>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+            >
+              <span style={{ fontSize: '28px' }}>✨</span>
+            </motion.div>
+          </div>
+          <p style={{ fontSize: '1.1rem', color: '#5a4a5a' }}>
+            Veja o antes e depois dos meus trabalhos
+          </p>
+        </motion.div>
 
         <Row>
-          {fotos.map((foto) => (
+          {fotos.map((foto, index) => (
             <Col key={foto.id} sm={6} lg={4} className="mb-4">
-              <div
-                className="glass-card"
-                style={{
-                  padding: '15px',
-                  cursor: 'pointer',
-                  transition: 'transform 0.3s ease',
-                }}
-                onClick={() => openModal(foto)}
-                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              <motion.div
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                variants={cardVariants}
+                onHoverStart={() => setHoveredIndex(index)}
+                onHoverEnd={() => setHoveredIndex(null)}
               >
-                <Row className="text-center">
-                  <Col xs={6}>
-                    <p style={{ color: '#880e4f', fontWeight: 600, marginBottom: '10px' }}>Antes</p>
-                    <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      aspectRatio: '1',
-                      borderRadius: '10px',
-                      overflow: 'hidden'
-                    }}>
-                      <Image
-                        src={foto.antes}
-                        alt={`${foto.nome} - Antes`}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={6}>
-                    <p style={{ color: '#ec407a', fontWeight: 600, marginBottom: '10px' }}>Depois</p>
-                    <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      aspectRatio: '1',
-                      borderRadius: '10px',
-                      overflow: 'hidden'
-                    }}>
-                      <Image
-                        src={foto.depois}
-                        alt={`${foto.nome} - Depois`}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-                <p style={{ textAlign: 'center', marginTop: '15px', color: '#4a0e2e', fontWeight: 600 }}>
-                  {foto.nome}
-                </p>
-              </div>
+                <motion.div
+                  onClick={() => openModal(foto)}
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.7))',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    borderRadius: '24px',
+                    padding: '20px',
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 32px rgba(233, 30, 99, 0.1)',
+                    transition: 'all 0.3s ease',
+                  }}
+                  animate={
+                    hoveredIndex === index
+                      ? {
+                          boxShadow: '0 20px 60px rgba(233, 30, 99, 0.2)',
+                          y: -8,
+                        }
+                      : {
+                          boxShadow: '0 8px 32px rgba(233, 30, 99, 0.1)',
+                          y: 0,
+                        }
+                  }
+                  transition={{ duration: 0.3 }}
+                >
+                  <Row className="text-center">
+                    <Col xs={6}>
+                      <motion.p
+                        style={{ color: '#ad1457', fontWeight: 600, marginBottom: '10px', fontSize: '0.9rem' }}
+                        animate={hoveredIndex === index ? { color: '#e91e63' } : {}}
+                      >
+                        Antes
+                      </motion.p>
+                      <motion.div
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          aspectRatio: '1',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          border: '2px solid rgba(173, 20, 87, 0.1)',
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <img
+                          src={foto.antes}
+                          alt={`${foto.nome} - Antes`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      </motion.div>
+                    </Col>
+                    <Col xs={6}>
+                      <motion.p
+                        style={{ color: '#e91e63', fontWeight: 600, marginBottom: '10px', fontSize: '0.9rem' }}
+                      >
+                        Depois
+                      </motion.p>
+                      <motion.div
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          aspectRatio: '1',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          border: '2px solid rgba(233, 30, 99, 0.3)',
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <img
+                          src={foto.depois}
+                          alt={`${foto.nome} - Depois`}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      </motion.div>
+                    </Col>
+                  </Row>
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      marginTop: '16px',
+                      color: '#ad1457',
+                      fontWeight: 600,
+                      fontSize: '0.95rem',
+                      marginBottom: 0,
+                    }}
+                  >
+                    {foto.nome}
+                  </p>
+                </motion.div>
+              </motion.div>
             </Col>
           ))}
         </Row>
 
-        <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
-          <Modal.Header closeButton style={{ background: '#fce4ec', borderBottom: 'none' }}>
-            <Modal.Title style={{
-              color: '#880e4f',
-              fontWeight: 700,
-              fontSize: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}>
-              <span>✂️</span>
+        {/* Modal with animations */}
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          centered
+          size="lg"
+          contentClassName="glass-card"
+        >
+          <Modal.Header
+            closeButton
+            style={{
+              background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.8))',
+              backdropFilter: 'blur(20px)',
+              borderBottom: 'none',
+              borderRadius: '24px 24px 0 0',
+            }}
+          >
+            <Modal.Title
+              style={{
+                color: '#ad1457',
+                fontWeight: 700,
+                fontSize: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                fontFamily: 'Playfair Display, serif',
+              }}
+            >
+              <motion.span animate={{ rotate: [0, -15, 15, -15, 0] }} transition={{ duration: 1 }}>
+                ✂️
+              </motion.span>
               {selectedFoto?.nome}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{ background: '#fce4ec' }}>
+          <Modal.Body
+            style={{
+              background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.8))',
+              backdropFilter: 'blur(20px)',
+              borderRadius: '0 0 24px 24px',
+            }}
+          >
             <Row className="text-center">
               <Col xs={12} md={6} className="mb-3 mb-md-0">
-                <p style={{ fontWeight: 700, color: '#880e4f', fontSize: '1.1rem' }}>Antes</p>
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '300px',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <Image
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{ fontWeight: 700, color: '#ad1457', fontSize: '1.2rem', marginBottom: '16px' }}
+                >
+                  Antes
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 }}
+                  style={{
+                    width: '100%',
+                    height: '300px',
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    border: '3px solid rgba(173, 20, 87, 0.2)',
+                  }}
+                >
+                  <img
                     src={selectedFoto?.antes || ''}
                     alt={`${selectedFoto?.nome} - Antes`}
-                    fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
-                </div>
+                </motion.div>
               </Col>
               <Col xs={12} md={6}>
-                <p style={{ fontWeight: 700, color: '#ec407a', fontSize: '1.1rem' }}>Depois</p>
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '300px',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <Image
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  style={{ fontWeight: 700, color: '#e91e63', fontSize: '1.2rem', marginBottom: '16px' }}
+                >
+                  Depois
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  style={{
+                    width: '100%',
+                    height: '300px',
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    border: '3px solid rgba(233, 30, 99, 0.4)',
+                  }}
+                >
+                  <img
                     src={selectedFoto?.depois || ''}
                     alt={`${selectedFoto?.nome} - Depois`}
-                    fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
-                </div>
+                </motion.div>
               </Col>
             </Row>
           </Modal.Body>
