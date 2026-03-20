@@ -239,6 +239,23 @@ p {
   animation: pulse 2.5s ease-in-out infinite;
 }
 
+/* Scroll indicator responsive styles */
+@media (max-width: 576px) {
+  .scroll-indicator-container {
+    --container-width: 50px;
+    --container-height: 85px;
+    --container-padding: 12px 10px;
+    --paw-size: 14px;
+  }
+}
+
+.scroll-indicator-container {
+  --container-width: 60px;
+  --container-height: 100px;
+  --container-padding: 16px 12px;
+  --paw-size: 18px;
+}
+
 /* Staggered Animation Delays */
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }

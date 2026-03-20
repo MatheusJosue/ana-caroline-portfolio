@@ -11,6 +11,15 @@ interface HeroProps {
 }
 
 export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
+  const [activePawIndex, setActivePawIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePawIndex((prev) => (prev + 1) % 3)
+    }, 900)
+    return () => clearInterval(interval)
+  }, [])
+
   const handleWhatsApp = () => {
     window.open('https://wa.me/5511973772653', '_blank')
   }
@@ -24,6 +33,23 @@ export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
     { top: '80%', left: '20%', delay: 2, size: 18 },
     { top: '45%', right: '8%', delay: 2.5, size: 26 },
   ]
+
+  const pawVariants = {
+    active: {
+      color: '#ad1457',
+      opacity: 1,
+      scale: 1.1,
+      filter: 'drop-shadow(0 0 8px rgba(233, 30, 99, 0.6))',
+      transition: { duration: 0.3, ease: 'easeInOut' },
+    },
+    inactive: {
+      color: 'rgba(173, 20, 87, 0.25)',
+      opacity: 0.25,
+      scale: 1,
+      filter: 'none',
+      transition: { duration: 0.3, ease: 'easeInOut' },
+    },
+  }
 
   return (
     <section
@@ -271,6 +297,7 @@ export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
 
         {/* Scroll indicator */}
         <motion.div
+          className="scroll-indicator-container"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.6 }}
@@ -279,25 +306,52 @@ export default function Hero({ nome, subtitulo, fotoUrl }: HeroProps) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '12px',
+            gap: '16px',
           }}
         >
+          {/* Glassmorphism container with paw icons */}
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             style={{
+              width: 'var(--container-width)',
+              height: 'var(--container-height)',
+              background: 'rgba(255, 255, 255, 0.65)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.5)',
+              borderRadius: '16px',
+              boxShadow: '0 8px 32px rgba(233, 30, 99, 0.15)',
+              padding: 'var(--container-padding)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '8px',
+              gap: '12px',
+            }}
+          >
+            {[0, 1, 2].map((index) => (
+              <motion.div
+                key={index}
+                variants={pawVariants}
+                initial={false}
+                animate={activePawIndex === index ? 'active' : 'inactive'}
+              >
+                <FaPaw style={{ fontSize: 'var(--paw-size)' }} />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Text below container */}
+          <span
+            style={{
               color: '#ad1457',
               fontSize: '0.9rem',
               fontWeight: 500,
+              opacity: 0.8,
             }}
           >
-            <span style={{ opacity: 0.8 }}>Continue rolando</span>
-            <span style={{ fontSize: '28px', opacity: 0.9 }}>↓</span>
-          </motion.div>
+            Continue rolando
+          </span>
         </motion.div>
       </Container>
     </section>
