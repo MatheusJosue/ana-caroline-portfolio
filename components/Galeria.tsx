@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Col, Container, Modal, Row } from "react-bootstrap";
-import { FaCut, FaMagic, FaPaw } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaCut, FaMagic, FaPaw } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const fotos = Array.from({ length: 17 }, (_, index) => {
@@ -18,10 +18,28 @@ const fotos = Array.from({ length: 17 }, (_, index) => {
 export default function Galeria() {
   const [showModal, setShowModal] = useState(false);
   const [selectedFoto, setSelectedFoto] = useState<(typeof fotos)[0] | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const openModal = (foto: (typeof fotos)[0]) => {
     setSelectedFoto(foto);
     setShowModal(true);
+  };
+
+  const scrollGallery = (direction: "previous" | "next") => {
+    const carousel = carouselRef.current;
+
+    if (!carousel) {
+      return;
+    }
+
+    const firstSlide = carousel.querySelector<HTMLElement>(".gallery-slide");
+    const slideWidth = firstSlide?.offsetWidth || carousel.clientWidth;
+    const gap = 20;
+
+    carousel.scrollBy({
+      left: direction === "next" ? slideWidth + gap : -(slideWidth + gap),
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -42,10 +60,30 @@ export default function Galeria() {
           <p className="flyer-subtitle">Veja alguns resultados de banho, tosa e acabamento.</p>
         </motion.div>
 
-        <Row>
-          {fotos.map((foto, index) => (
-            <Col key={foto.id} sm={6} lg={4} className="mb-4">
+        <div className="gallery-carousel-shell">
+          <div className="gallery-carousel-actions" aria-label="Navegação da galeria">
+            <button
+              type="button"
+              className="gallery-nav"
+              onClick={() => scrollGallery("previous")}
+              aria-label="Ver transformações anteriores"
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              type="button"
+              className="gallery-nav"
+              onClick={() => scrollGallery("next")}
+              aria-label="Ver próximas transformações"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+
+          <div ref={carouselRef} className="gallery-carousel">
+            {fotos.map((foto, index) => (
               <motion.button
+                key={foto.id}
                 type="button"
                 onClick={() => openModal(foto)}
                 initial={{ opacity: 0, y: 22 }}
@@ -53,8 +91,7 @@ export default function Galeria() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.45, delay: Math.min(index * 0.035, 0.35) }}
                 whileHover={{ y: -4 }}
-                className="flyer-card gallery-card"
-                style={{ width: "100%", border: "2px solid var(--color-line)" }}
+                className="flyer-card gallery-card gallery-slide"
               >
                 <Row className="g-2">
                   <Col xs={6}>
@@ -67,9 +104,9 @@ export default function Galeria() {
                   </Col>
                 </Row>
               </motion.button>
-            </Col>
-          ))}
-        </Row>
+            ))}
+          </div>
+        </div>
 
         <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
           <Modal.Header closeButton style={{ borderBottom: "1px solid var(--color-line)" }}>

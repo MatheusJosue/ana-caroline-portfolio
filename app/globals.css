@@ -707,6 +707,7 @@ p {
 .gallery-card {
   padding: 12px;
   cursor: pointer;
+  border: 2px solid var(--color-line);
 }
 
 .gallery-image {
@@ -723,6 +724,70 @@ p {
   color: var(--color-primary-dark);
   font-weight: 800;
   text-align: center;
+}
+
+.gallery-carousel-shell {
+  position: relative;
+}
+
+.gallery-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 40px) / 3);
+  gap: 20px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 2px;
+  padding: 6px 2px 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-light) transparent;
+}
+
+.gallery-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.gallery-carousel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-full);
+}
+
+.gallery-carousel::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: var(--radius-full);
+}
+
+.gallery-slide {
+  width: 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.gallery-carousel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.gallery-nav {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--color-line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-primary-dark);
+  display: inline-grid;
+  place-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.gallery-nav:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary);
+  color: #fff;
 }
 
 .contact-strip {
@@ -838,6 +903,10 @@ p {
   .extra-item:last-child {
     border-bottom: 0;
   }
+
+  .gallery-carousel {
+    grid-auto-columns: calc((100% - 20px) / 2);
+  }
 }
 
 @media (max-width: 576px) {
@@ -869,5 +938,13 @@ p {
   .service-card {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .gallery-carousel {
+    grid-auto-columns: 100%;
+  }
+
+  .gallery-carousel-actions {
+    justify-content: center;
   }
 }
