@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "CarolPetHouse - Banho e Tosa para seu Pet",
   description:
     "Banho e tosa em Jundiaí - SP com cuidado, carinho e atendimento profissional para cães e gatos. Atendemos Jardim Martins, Vila Maringá e região.",
@@ -43,9 +46,21 @@ export const metadata: Metadata = {
     title: "CarolPetHouse - Banho e Tosa em Jundiaí",
     description:
       "Serviços de banho, tosa higiênica, hidratação e cuidados pet em Jundiaí - SP.",
+    url: siteUrl,
     locale: "pt_BR",
     type: "website",
     siteName: "CarolPetHouse",
+    images: [
+      {
+        url: "/images/depois15.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "CarolPetHouse banho e tosa em Jundiaí",
+      },
+    ],
+  },
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
@@ -70,6 +85,7 @@ const localBusinessJsonLd = {
     "Vila Maringá",
   ],
   priceRange: "$$",
+  url: siteUrl,
   sameAs: ["https://www.instagram.com/anacarol_sol/"],
   makesOffer: [
     {
