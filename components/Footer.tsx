@@ -1,7 +1,14 @@
 "use client";
 
 import { Container } from "react-bootstrap";
-import { FaClock, FaHeart, FaInstagram, FaMapMarkerAlt, FaPaw, FaWhatsapp } from "react-icons/fa";
+import {
+  FaClock,
+  FaHeart,
+  FaInstagram,
+  FaMapMarkerAlt,
+  FaPaw,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const contacts = [
@@ -20,8 +27,8 @@ const contacts = [
   },
   {
     icon: FaClock,
-    label: "HorÃ¡rio",
-    value: "Seg a Sex - 9h Ã s 18h",
+    label: "Horário",
+    value: "Seg a Sex - 9h ãs 18h",
     color: "var(--color-teal-dark)",
   },
 ];
@@ -43,7 +50,8 @@ export default function Footer() {
           </span>
           <h2 className="flyer-title">Ficou com alguma duvida?</h2>
           <p className="flyer-subtitle">
-            Chame no WhatsApp para consultar horÃ¡rios, valores e disponibilidade.
+            Chame no WhatsApp para consultar horários, valores e
+            disponibilidade.
           </p>
         </motion.div>
 
@@ -64,7 +72,13 @@ export default function Footer() {
               );
 
               return item.href ? (
-                <a key={item.label} className="contact-item flyer-card" href={item.href} target="_blank" rel="noopener noreferrer">
+                <a
+                  key={item.label}
+                  className="contact-item flyer-card"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {content}
                 </a>
               ) : (
@@ -76,11 +90,21 @@ export default function Footer() {
           </div>
 
           <div className="hero-actions">
-            <a className="primary-cta whatsapp-btn" href="https://wa.me/5511973772653" target="_blank" rel="noopener noreferrer">
+            <a
+              className="primary-cta whatsapp-btn"
+              href="https://wa.me/5511973772653"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaWhatsapp />
               Conversar no WhatsApp
             </a>
-            <a className="secondary-cta" href="https://www.instagram.com/anacarol_sol/" target="_blank" rel="noopener noreferrer">
+            <a
+              className="secondary-cta"
+              href="https://www.instagram.com/anacarol_sol/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram />
               Instagram
             </a>

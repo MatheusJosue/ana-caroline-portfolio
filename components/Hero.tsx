@@ -86,7 +86,7 @@ export default function Hero({
             </div>
 
             <h2 className="hero-headline">
-              Marque um horÃ¡rio para banho ou tosa!
+              Marque um horário para banho ou tosa!
             </h2>
             <p className="hero-copy">
               Atendimento com atenÃ§Ã£o especial, conforto e muito carinho para
