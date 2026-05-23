@@ -41,7 +41,7 @@ export default function Footer() {
             <FaHeart />
             Agende agora
           </span>
-          <h2 className="flyer-title">Ficou com alguma dÃºvida?</h2>
+          <h2 className="flyer-title">Ficou com alguma duvida?</h2>
           <p className="flyer-subtitle">
             Chame no WhatsApp para consultar horÃ¡rios, valores e disponibilidade.
           </p>
