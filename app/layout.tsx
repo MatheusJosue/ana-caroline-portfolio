@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Ana Caroline - Tosadora",
   description:
-    "Serviços profissionais de banho e tosa para seu pet. Amoroso cuidado e transformação!",
+    "Serviços profissionais de banho e tosa para seu pet. Cuidado, carinho e transformação!",
 };
 
 export default function RootLayout({

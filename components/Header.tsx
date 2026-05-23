@@ -51,14 +51,14 @@ export default function Header() {
         className="glass-card"
         style={{
           margin: scrolled ? "5px 15px" : "15px",
-          borderRadius: "24px",
+          borderRadius: "8px",
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           background: scrolled
-            ? "rgba(255, 255, 255, 0.9)"
-            : "rgba(255, 255, 255, 0.7)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(255, 255, 255, 0.5)",
+            ? "rgba(255, 255, 255, 0.95)"
+            : "rgba(255, 255, 255, 0.82)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          border: "1px solid rgba(243, 168, 200, 0.75)",
           boxShadow: scrolled
             ? "0 8px 32px rgba(233, 30, 99, 0.15)"
             : "0 4px 16px rgba(233, 30, 99, 0.08)",
@@ -68,10 +68,10 @@ export default function Header() {
           <Navbar.Brand
             href="#home"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "Baloo 2, Poppins, sans-serif",
               fontWeight: 700,
               fontSize: "1.5rem",
-              background: "linear-gradient(135deg, #e91e63, #ad1457)",
+              background: "linear-gradient(135deg, #e73578, #005d66)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -82,7 +82,7 @@ export default function Header() {
               animate={{ rotate: [0, -10, 10, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
-              <FaPaw style={{ color: "#e91e63" }} />
+              <FaPaw style={{ color: "#e73578" }} />
             </motion.div>
             Ana Caroline
           </Navbar.Brand>
@@ -121,20 +121,20 @@ export default function Header() {
                   <Nav.Link
                     href={link.href}
                     style={{
-                      color: "#5a4a5a",
-                      fontWeight: 500,
+                      color: "#23383b",
+                      fontWeight: 700,
                       padding: "10px 18px",
-                      borderRadius: "12px",
+                      borderRadius: "8px",
                       position: "relative",
                       transition: "all 0.3s ease",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#ad1457";
+                      e.currentTarget.style.color = "#b91657";
                       e.currentTarget.style.background =
-                        "rgba(233, 30, 99, 0.08)";
+                        "rgba(231, 53, 120, 0.09)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "#5a4a5a";
+                      e.currentTarget.style.color = "#23383b";
                       e.currentTarget.style.background = "transparent";
                     }}
                     onClick={() => setExpanded(false)}
@@ -160,7 +160,7 @@ export default function Header() {
                     justifyContent: "center",
                     width: "42px",
                     height: "42px",
-                    borderRadius: "12px",
+                    borderRadius: "8px",
                     background: "linear-gradient(135deg, #25D366, #128C7E)",
                     color: "white",
                     transition: "all 0.3s ease",
@@ -190,7 +190,7 @@ export default function Header() {
                     justifyContent: "center",
                     width: "42px",
                     height: "42px",
-                    borderRadius: "12px",
+                    borderRadius: "8px",
                     background:
                       "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
                     color: "white",
