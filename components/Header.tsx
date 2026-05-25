@@ -84,7 +84,7 @@ export default function Header() {
             >
               <FaPaw style={{ color: "#e73578" }} />
             </motion.div>
-            Ana Caroline
+            Carol Pet House
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
@@ -172,8 +172,7 @@ export default function Header() {
                       "0 8px 20px rgba(37, 211, 102, 0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform =
-                      "translateY(0) scale(1)";
+                    e.currentTarget.style.transform = "translateY(0) scale(1)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                   title="WhatsApp"
@@ -203,8 +202,7 @@ export default function Header() {
                       "0 8px 20px rgba(225, 48, 108, 0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform =
-                      "translateY(0) scale(1)";
+                    e.currentTarget.style.transform = "translateY(0) scale(1)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                   title="Instagram"

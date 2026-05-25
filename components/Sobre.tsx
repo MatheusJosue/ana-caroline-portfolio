@@ -90,7 +90,7 @@ export default function Sobre() {
                 style={{ transform: "rotate(-1deg)" }}
               >
                 <img
-                  src="/images/depois14.jpeg"
+                  src="/images/depois13.jpeg"
                   alt="Pet com acabamento de banho e tosa"
                 />
               </div>

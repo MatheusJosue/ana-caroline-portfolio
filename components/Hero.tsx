@@ -80,7 +80,7 @@ export default function Hero({
               </div>
 
               <h1 className="hero-brand-name">
-                <span>Ana</span> Caroline
+                <span>Carol Pet</span> House
               </h1>
               <p className="hero-tagline">Onde seu pet se sente em casa!</p>
             </div>
@@ -89,8 +89,8 @@ export default function Hero({
               Marque um horário para banho ou tosa!
             </h2>
             <p className="hero-copy">
-              Atendimento com atenÃ§Ã£o especial, conforto e muito carinho para
-              o seu melhor amigo.
+              Atendimento com atenção especial, conforto e muito carinho para o
+              seu melhor amigo.
             </p>
 
             <div className="hero-actions">
@@ -105,7 +105,7 @@ export default function Hero({
               </a>
               <a className="secondary-cta" href="#servicos">
                 <FaBath />
-                Ver serviÃ§os
+                Ver serviços
               </a>
             </div>
           </motion.div>

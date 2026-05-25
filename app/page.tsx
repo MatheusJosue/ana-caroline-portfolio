@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main>
       <Header />
-      <Hero nome="Ana Caroline" subtitulo="Tosadora" />
+      <Hero nome="Carol Pet" subtitulo="House" />
       <Sobre />
       <Servicos />
       <Galeria />

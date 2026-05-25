@@ -124,7 +124,7 @@ export default function Footer() {
             marginTop: 32,
           }}
         >
-          Â© 2026 Ana Caroline - Tosadora. Feito com cuidado
+          © 2026 Carol Pet House. Feito com cuidado
           <FaHeart style={{ color: "var(--color-primary)", margin: "0 8px" }} />
           <FaPaw style={{ color: "var(--color-primary)" }} />
         </motion.div>
