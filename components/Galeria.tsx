@@ -5,15 +5,14 @@ import { Col, Container, Modal, Row } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight, FaCut, FaMagic, FaPaw } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const fotos = Array.from({ length: 17 }, (_, index) => {
-  const id = index + 1;
-  return {
+const fotos = Array.from({ length: 17 }, (_, index) => index + 1)
+  .filter((id) => id !== 11)
+  .map((id) => ({
     id,
     antes: `/images/antes${id}.jpeg`,
     depois: `/images/depois${id}.jpeg`,
     nome: `Transformação ${id}`,
-  };
-});
+  }));
 
 export default function Galeria() {
   const [showModal, setShowModal] = useState(false);
