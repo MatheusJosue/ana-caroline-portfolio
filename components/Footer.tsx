@@ -28,7 +28,7 @@ const contacts = [
   {
     icon: FaClock,
     label: "Horário",
-    value: "Seg a Sex - 9h ãs 18h",
+    value: "Seg a Sex - 9h às 18h",
     color: "var(--color-teal-dark)",
   },
 ];
